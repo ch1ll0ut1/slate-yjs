@@ -27,11 +27,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "slate": "^0.82.1",
+    "slate": "^0.101.5",
     "slate-hyperscript": "^0.67.0",
     "tsup": "^5.12.1",
-    "typescript": "^4.6.3",
-    "yjs": "^13.5.29"
+    "typescript": "^5.3.3",
+    "yjs": "^13.6.10"
   },
   "peerDependencies": {
     "slate": ">=0.70.0",
