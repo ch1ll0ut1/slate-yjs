@@ -12,6 +12,7 @@ import {
   slatePointToRelativePosition,
 } from '../utils/position';
 import { assertDocumentAttachment } from '../utils/yjs';
+import { SharedRoot } from '../model/types';
 
 type LocalChange = {
   op: Operation;
@@ -27,7 +28,7 @@ const LOCAL_CHANGES: WeakMap<Editor, LocalChange[]> = new WeakMap();
 const CONNECTED: WeakSet<Editor> = new WeakSet();
 
 export type YjsEditor = BaseEditor & {
-  sharedRoot: Y.XmlText;
+  sharedRoot: SharedRoot;
 
   localOrigin: unknown;
   positionStorageOrigin: unknown;
@@ -155,7 +156,7 @@ export type WithYjsOptions = {
 
 export function withYjs<T extends Editor>(
   editor: T,
-  sharedRoot: Y.XmlText,
+  sharedRoot: SharedRoot,
   {
     localOrigin,
     positionStorageOrigin,

@@ -1,6 +1,7 @@
 import { Editor, Operation } from 'slate';
 import * as Y from 'yjs';
 import { translateYTextEvent } from './textEvent';
+import { SharedRoot } from '../model/types';
 
 /**
  * Translate a yjs event into slate operations. The editor state has to match the
@@ -10,7 +11,7 @@ import { translateYTextEvent } from './textEvent';
  * @param op
  */
 export function translateYjsEvent(
-  sharedRoot: Y.XmlText,
+  sharedRoot: SharedRoot,
   editor: Editor,
   event: Y.YEvent<Y.XmlText>
 ): Operation[] {
@@ -30,7 +31,7 @@ export function translateYjsEvent(
  * @param events
  */
 export function applyYjsEvents(
-  sharedRoot: Y.XmlText,
+  sharedRoot: SharedRoot,
   editor: Editor,
   events: Y.YEvent<Y.XmlText>[]
 ) {

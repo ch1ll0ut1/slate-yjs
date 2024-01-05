@@ -5,6 +5,7 @@ import * as Y from 'yjs';
 import { fixtures } from '../../../support/fixtures';
 import { yTextToSlateElement } from '../src';
 import { withTestingElements } from './withTestingElements';
+import { SharedRoot } from '../src/model/types';
 
 export type FixtureModule = {
   module: {
@@ -14,7 +15,7 @@ export type FixtureModule = {
   };
 };
 
-async function normalizedSlateDoc(sharedRoot: Y.XmlText) {
+async function normalizedSlateDoc(sharedRoot: SharedRoot) {
   const editor = createEditor();
   editor.children = yTextToSlateElement(sharedRoot).children;
   const e = await withTestingElements(editor);

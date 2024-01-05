@@ -1,6 +1,10 @@
 import type { Editor, Element, Node } from 'slate';
 import type Y from 'yjs';
 
+// Allow augmentation by consumers
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface SharedRoot extends Y.XmlFragment {}
+
 export type DeltaAttributes = {
   retain: number;
   attributes: Record<string, unknown>;

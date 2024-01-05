@@ -1,9 +1,9 @@
 import { Node, SetNodeOperation } from 'slate';
-import * as Y from 'yjs';
 import { getYTarget } from '../../utils/location';
+import { SharedRoot } from '../../model/types';
 
 export function setNode(
-  sharedRoot: Y.XmlText,
+  sharedRoot: SharedRoot,
   slateRoot: Node,
   op: SetNodeOperation
 ): void {

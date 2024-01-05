@@ -1,6 +1,6 @@
 import { Editor, Element, Node, Operation, Path, Text } from 'slate';
 import * as Y from 'yjs';
-import { Delta } from '../model/types';
+import { Delta, SharedRoot } from '../model/types';
 import { deltaInsertToSlateNode } from '../utils/convert';
 import {
   getSlateNodeYLength,
@@ -237,7 +237,7 @@ function applyDelta(node: Element, slatePath: Path, delta: Delta): Operation[] {
 }
 
 export function translateYTextEvent(
-  sharedRoot: Y.XmlText,
+  sharedRoot: SharedRoot,
   editor: Editor,
   event: Y.YTextEvent
 ): Operation[] {

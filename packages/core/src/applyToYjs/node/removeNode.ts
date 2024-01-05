@@ -1,9 +1,9 @@
 import { Node, RemoveNodeOperation } from 'slate';
-import * as Y from 'yjs';
 import { getYTarget } from '../../utils/location';
+import { SharedRoot } from '../../model/types';
 
 export function removeNode(
-  sharedRoot: Y.XmlText,
+  sharedRoot: SharedRoot,
   slateRoot: Node,
   op: RemoveNodeOperation
 ): void {

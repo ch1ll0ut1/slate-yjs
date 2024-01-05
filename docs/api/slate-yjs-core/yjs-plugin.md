@@ -122,7 +122,7 @@ Determine whether a origin is local. I.e. whether changes to the yjs document wi
 
 ### Instance fields
 
-**`sharedRoot: Y.XmlText`**
+**`sharedRoot: SharedRoot`**
 
 Shared type the binding is bound to.
 
