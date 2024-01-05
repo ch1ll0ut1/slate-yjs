@@ -266,7 +266,7 @@ export function translateYTextEvent(
     );
 
     const properties = Object.fromEntries(
-      keyChanges.map(([key]) => [key, targetElement[key]])
+      keyChanges.map(([key]) => [key, targetElement[key as keyof Element]])
     );
 
     ops.push({ type: 'set_node', newProperties, properties, path: slatePath });
