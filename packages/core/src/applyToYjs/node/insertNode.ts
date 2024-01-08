@@ -1,11 +1,11 @@
 import { InsertNodeOperation, Node, Text } from 'slate';
+import * as Y from 'yjs';
 import { slateElementToYText } from '../../utils/convert';
 import { getYTarget } from '../../utils/location';
 import { getProperties } from '../../utils/slate';
-import { SharedRoot } from '../../model/types';
 
 export function insertNode(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   op: InsertNodeOperation
 ): void {

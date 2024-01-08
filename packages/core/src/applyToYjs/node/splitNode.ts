@@ -7,10 +7,9 @@ import {
   getStoredPositionsInDeltaAbsolute,
   restoreStoredPositionsWithDeltaAbsolute,
 } from '../../utils/position';
-import { SharedRoot } from '../../model/types';
 
 export function splitNode(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   op: SplitNodeOperation
 ): void {

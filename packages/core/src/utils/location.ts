@@ -1,6 +1,6 @@
 import { Element, Node, Path, Text } from 'slate';
 import * as Y from 'yjs';
-import { SharedRoot, YTarget } from '../model/types';
+import { YTarget } from '../model/types';
 import { sliceInsertDelta, yTextToInsertDelta } from './delta';
 
 export function getSlateNodeYLength(node: Node | undefined): number {
@@ -18,7 +18,7 @@ export function slatePathOffsetToYOffset(element: Element, pathOffset: number) {
 }
 
 export function getYTarget(
-  yRoot: SharedRoot,
+  yRoot: Y.XmlText,
   slateRoot: Node,
   path: Path
 ): YTarget {
@@ -106,7 +106,7 @@ export function yOffsetToSlateOffsets(
 }
 
 export function getSlatePath(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   yText: Y.XmlText
 ): Path {

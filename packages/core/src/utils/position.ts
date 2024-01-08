@@ -1,11 +1,6 @@
 import { BasePoint, BaseRange, Node, Text } from 'slate';
 import * as Y from 'yjs';
-import {
-  InsertDelta,
-  RelativeRange,
-  SharedRoot,
-  TextRange,
-} from '../model/types';
+import { InsertDelta, RelativeRange, TextRange } from '../model/types';
 import { getInsertDeltaLength, yTextToInsertDelta } from './delta';
 import { getSlatePath, getYTarget, yOffsetToSlateOffsets } from './location';
 import { assertDocumentAttachment } from './yjs';
@@ -13,7 +8,7 @@ import { assertDocumentAttachment } from './yjs';
 export const STORED_POSITION_PREFIX = '__slateYjsStoredPosition_';
 
 export function slatePointToRelativePosition(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   point: BasePoint
 ): Y.RelativePosition {
@@ -38,7 +33,7 @@ export function slatePointToRelativePosition(
 }
 
 export function absolutePositionToSlatePoint(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   { type, index, assoc }: Y.AbsolutePosition
 ): BasePoint | null {
@@ -68,7 +63,7 @@ export function absolutePositionToSlatePoint(
 }
 
 export function relativePositionToSlatePoint(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   pos: Y.RelativePosition
 ): BasePoint | null {
@@ -85,7 +80,7 @@ export function relativePositionToSlatePoint(
 }
 
 export function getStoredPosition(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   key: string
 ): Y.RelativePosition | null {
   const rawPosition = sharedRoot.getAttribute(STORED_POSITION_PREFIX + key);
@@ -97,7 +92,7 @@ export function getStoredPosition(
 }
 
 export function getStoredPositions(
-  sharedRoot: SharedRoot
+  sharedRoot: Y.XmlText
 ): Record<string, Y.RelativePosition> {
   return Object.fromEntries(
     Object.entries(sharedRoot.getAttributes())
@@ -109,7 +104,7 @@ export function getStoredPositions(
   );
 }
 
-function getStoredPositionsAbsolute(sharedRoot: SharedRoot) {
+function getStoredPositionsAbsolute(sharedRoot: Y.XmlText) {
   assertDocumentAttachment(sharedRoot);
 
   return Object.fromEntries(
@@ -129,12 +124,12 @@ function getStoredPositionsAbsolute(sharedRoot: SharedRoot) {
   ) as Record<string, Y.AbsolutePosition>;
 }
 
-export function removeStoredPosition(sharedRoot: SharedRoot, key: string) {
+export function removeStoredPosition(sharedRoot: Y.XmlText, key: string) {
   sharedRoot.removeAttribute(STORED_POSITION_PREFIX + key);
 }
 
 export function setStoredPosition(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   key: string,
   position: Y.RelativePosition
 ) {
@@ -193,7 +188,7 @@ function getAbsolutePositionsInYText(
 }
 
 export function getStoredPositionsInDeltaAbsolute(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   yText: Y.XmlText,
   delta: InsertDelta,
   deltaOffset = 0
@@ -220,7 +215,7 @@ export function getStoredPositionsInDeltaAbsolute(
 }
 
 export function restoreStoredPositionsWithDeltaAbsolute(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   yText: Y.XmlText,
   absolutePositions: Record<string, Record<string, Y.AbsolutePosition>>,
   delta: InsertDelta,
@@ -260,7 +255,7 @@ export function restoreStoredPositionsWithDeltaAbsolute(
 }
 
 export function slateRangeToRelativeRange(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   range: BaseRange
 ): RelativeRange {
@@ -271,7 +266,7 @@ export function slateRangeToRelativeRange(
 }
 
 export function relativeRangeToSlateRange(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   range: RelativeRange
 ): BaseRange | null {

@@ -1,5 +1,6 @@
 import { MoveNodeOperation, Node, Path, Text } from 'slate';
-import { Delta, SharedRoot } from '../../model/types';
+import * as Y from 'yjs';
+import { Delta } from '../../model/types';
 import { cloneInsertDeltaDeep } from '../../utils/clone';
 import { getInsertDeltaLength, yTextToInsertDelta } from '../../utils/delta';
 import { getYTarget } from '../../utils/location';
@@ -9,7 +10,7 @@ import {
 } from '../../utils/position';
 
 export function moveNode(
-  sharedRoot: SharedRoot,
+  sharedRoot: Y.XmlText,
   slateRoot: Node,
   op: MoveNodeOperation
 ): void {
