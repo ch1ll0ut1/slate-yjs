@@ -1,7 +1,7 @@
 import { Editor, Element, Transforms } from 'slate';
 import * as Y from 'yjs';
 import { wait } from '../../../support/utils';
-import { slateNodesToInsertDelta, withYjs } from '../src';
+import { assignSlateToDoc, withYjs } from '../src';
 
 const INLINE_ELEMENTS = ['note-link', 'link'];
 
@@ -19,6 +19,7 @@ export async function withTestingElements(
     if (
       Element.isElement(node) &&
       !Editor.isEditor(node) &&
+      // @ts-expect-error no type for element is defined since its just a test
       node.type === 'unordered-list'
     ) {
       if (!node.children.length) {
@@ -30,12 +31,10 @@ export async function withTestingElements(
   };
 
   editor.isInline = (element) =>
+    // @ts-expect-error no type for element is defined since its just a test
     INLINE_ELEMENTS.includes(element.type as string) || isInline(element);
 
-  const sharedType = doc.get('sharedRoot', Y.XmlText) as Y.XmlText;
-  if (sharedType.toDelta().length === 0) {
-    sharedType.applyDelta(slateNodesToInsertDelta(editor.children));
-  }
+  const sharedType = assignSlateToDoc(editor.children, doc);
 
   const e = withYjs(editor, sharedType, { autoConnect: true });
 

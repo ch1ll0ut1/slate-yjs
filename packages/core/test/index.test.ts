@@ -3,9 +3,9 @@ import { createEditor, Editor } from 'slate';
 import { describe, expect } from 'vitest';
 import * as Y from 'yjs';
 import { fixtures } from '../../../support/fixtures';
-import { yTextToSlateElement } from '../src';
 import { withTestingElements } from './withTestingElements';
 import { SharedRoot } from '../src/model/types';
+import { convertYToSlate } from '../src/utils/convert';
 
 export type FixtureModule = {
   module: {
@@ -17,7 +17,7 @@ export type FixtureModule = {
 
 async function normalizedSlateDoc(sharedRoot: SharedRoot) {
   const editor = createEditor();
-  editor.children = yTextToSlateElement(sharedRoot).children;
+  editor.children = convertYToSlate(sharedRoot);
   const e = await withTestingElements(editor);
   Editor.normalize(e, { force: true });
   return e.children;
@@ -27,6 +27,10 @@ async function runCollaborationTest({ module }: FixtureModule) {
   // Setup 'local' editor
   const { input, run, expected } = module;
   const editor = await withTestingElements(input);
+
+  if (!editor.sharedRoot.doc) {
+    throw new Error('SharedRoot is not attached to a Doc');
+  }
 
   // Keep the 'local' editor state before applying run.
   const baseState = Y.encodeStateAsUpdateV2(editor.sharedRoot.doc);

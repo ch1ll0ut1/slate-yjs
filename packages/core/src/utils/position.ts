@@ -93,7 +93,7 @@ export function getStoredPosition(
     return null;
   }
 
-  return Y.decodeRelativePosition(rawPosition);
+  return Y.decodeRelativePosition(rawPosition as unknown as Uint8Array);
 }
 
 export function getStoredPositions(
@@ -120,7 +120,7 @@ function getStoredPositionsAbsolute(sharedRoot: SharedRoot) {
           [
             key.slice(STORED_POSITION_PREFIX.length),
             Y.createAbsolutePositionFromRelativePosition(
-              Y.decodeRelativePosition(position),
+              Y.decodeRelativePosition(position as unknown as Uint8Array),
               sharedRoot.doc
             ),
           ] as const
@@ -140,7 +140,7 @@ export function setStoredPosition(
 ) {
   sharedRoot.setAttribute(
     STORED_POSITION_PREFIX + key,
-    Y.encodeRelativePosition(position)
+    Y.encodeRelativePosition(position) as unknown as string
   );
 }
 

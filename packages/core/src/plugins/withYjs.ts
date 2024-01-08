@@ -2,7 +2,8 @@ import { BaseEditor, Descendant, Editor, Operation, Point } from 'slate';
 import * as Y from 'yjs';
 import { applyYjsEvents } from '../applyToSlate';
 import { applySlateOp } from '../applyToYjs';
-import { yTextToSlateElement } from '../utils/convert';
+import { SharedRoot } from '../model/types';
+import { convertYToSlate } from '../utils/convert';
 import {
   getStoredPosition,
   getStoredPositions,
@@ -12,7 +13,6 @@ import {
   slatePointToRelativePosition,
 } from '../utils/position';
 import { assertDocumentAttachment } from '../utils/yjs';
-import { SharedRoot } from '../model/types';
 
 type LocalChange = {
   op: Operation;
@@ -208,8 +208,7 @@ export function withYjs<T extends Editor>(
     }
 
     e.sharedRoot.observeDeep(handleYEvents);
-    const content = yTextToSlateElement(e.sharedRoot);
-    e.children = content.children;
+    e.children = convertYToSlate(e.sharedRoot);
     CONNECTED.add(e);
 
     Editor.normalize(editor, { force: true });

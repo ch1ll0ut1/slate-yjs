@@ -3,7 +3,7 @@ import type Y from 'yjs';
 
 // Allow augmentation by consumers
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface SharedRoot extends Y.XmlFragment {}
+export type SharedRoot = Y.XmlElement;
 
 export type DeltaAttributes = {
   retain: number;
@@ -32,14 +32,14 @@ export type YTarget = {
   textRange: TextRange;
 
   // Y.XmlText containing the slate node
-  yParent: Y.XmlText;
+  yParent: Y.XmlElement | Y.XmlFragment;
 
   // Slate element mapping to the yParent
   slateParent: Element | Editor;
 
   // If the target points to a slate element, Y.XmlText representing the target.
   // If it points to a text (or position to insert), this will be undefined.
-  yTarget?: Y.XmlText;
+  yTarget?: Y.XmlElement | Y.XmlFragment;
 
   // Slate node represented by the textRange, won't be set if position is insert.
   slateTarget?: Node;

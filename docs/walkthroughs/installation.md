@@ -22,7 +22,7 @@ Once you've installed slate-yjs, you'll need to import it.
 
 ```jsx
 // Import the core binding
-import { withYjs, slateNodesToInsertDelta, YjsEditor } from '@slate-yjs/core';
+import { withYjs, assignSlateToDoc, YjsEditor } from '@slate-yjs/core';
 
 // Import yjs
 import * as Y from 'yjs';
@@ -96,13 +96,8 @@ const initialValue = [{
 const Editor = () => {
   // Create a yjs document and get the shared type
   const sharedType = useMemo(() => {
-    const yDoc = new Y.Doc()
-    const sharedType = yDoc.get("content", Y.XmlText)
-
     // Load the initial value into the yjs document
-    sharedType.applyDelta(slateNodesToInsertDelta(initialValue))
-
-    return sharedType
+    return assignSlateToDoc(initialValue, yDoc)
   }, [])
 
   const editor = useMemo(() => withReact(createEditor()), [])
@@ -130,13 +125,8 @@ const initialValue = [{
 const Editor = () => {
   // Create a yjs document and get the shared type
   const sharedType = useMemo(() => {
-    const yDoc = new Y.Doc()
-    const sharedType = yDoc.get("content", Y.XmlText)
-
     // Load the initial value into the yjs document
-    sharedType.applyDelta(slateNodesToInsertDelta(initialValue))
-
-    return sharedType
+    return assignSlateToDoc(initialValue, yDoc)
   }, [])
 
   // Setup the binding
@@ -171,13 +161,8 @@ const initialValue = [{
 const Editor = () => {
   // Create a yjs document and get the shared type
   const sharedType = useMemo(() => {
-    const yDoc = new Y.Doc()
-    const sharedType = yDoc.get("content", Y.XmlText)
-
     // Load the initial value into the yjs document
-    sharedType.applyDelta(slateNodesToInsertDelta(initialValue))
-
-    return sharedType
+    return assignSlateToDoc(initialValue, yDoc)
   }, [])
 
   // Setup the binding

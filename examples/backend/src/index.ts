@@ -1,7 +1,7 @@
 import { Logger } from '@hocuspocus/extension-logger';
 import { SQLite } from '@hocuspocus/extension-sqlite';
 import { Server } from '@hocuspocus/server';
-import { slateNodesToInsertDelta } from '@slate-yjs/core';
+import { assignSlateToDoc } from '@slate-yjs/core';
 import * as Y from 'yjs';
 import initialValue from './data/initialValue.json';
 
@@ -19,12 +19,7 @@ const server = Server.configure({
 
   async onLoadDocument(data) {
     if (data.document.isEmpty('content')) {
-      const insertDelta = slateNodesToInsertDelta(initialValue);
-      const sharedRoot = data.document.get(
-        'content',
-        Y.XmlText
-      ) as unknown as Y.XmlText;
-      sharedRoot.applyDelta(insertDelta);
+      return assignSlateToDoc(initialValue, data.document)
     }
 
     return data.document;

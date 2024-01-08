@@ -13,7 +13,8 @@ import {
   YHistoryEditor,
   YjsEditor,
 } from './plugins';
-import { slateNodesToInsertDelta, yTextToSlateElement } from './utils/convert';
+// import { slateNodesToInsertDelta, yTextToSlateElement } from './utils/convert';
+import { assignSlateToDoc } from './utils/convert';
 import {
   relativePositionToSlatePoint,
   relativeRangeToSlateRange,
@@ -38,8 +39,9 @@ export {
   CursorStateChangeEvent,
   // Utils
   RelativeRange,
-  yTextToSlateElement,
-  slateNodesToInsertDelta,
+  // yTextToSlateElement,
+  // slateNodesToInsertDelta,
+  assignSlateToDoc,
   slateRangeToRelativeRange,
   relativeRangeToSlateRange,
   slatePointToRelativePosition,

@@ -4,13 +4,14 @@
 
 <br/>
 
-**`yTextToSlateElement(yText: Y.XmlText): Element`**
+**`convertYToSlate(element: Y.XmlFragment): Descendant[]`**
 
-Convert a Y.XmlText to a slate element. Useful when serializing documents from shared roots.
+Convert a Y.XmlFragment to a slate element. Useful when serializing documents from shared roots.
 
-**`slateNodesToInsertDelta(nodes: Node[]): InsertDelta`**
+**`assignSlateToDoc(nodes: Descendant[], doc: Y.Doc)`**
 
-Convert slate nodes to an `InsertDelta`. Useful when initializing documents.
+Convert slate nodes and assign to Doc. Useful when initializing documents.
+To initialize in a single update, either wrap in a transaction or create a temporary Doc and then use `Y.encodeStateAsUpdate` and `Y.applyUpdate`
 
 **`slateRangeToRelativeRange(sharedRoot: SharedRoot, slateRoot: Node, range: BaseRange): RelativeRange`**
 
